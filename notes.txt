@@ -3,3 +3,12 @@ Creating a test express application with express-generator
 - express --view=ejs myapp
 - cd myapp
 - npm i
+- commit
+- npm i nodemon --save-dev
+- npm i reload --save-dev
+- add
+  - var reload = require('reload'); // in myapp/bin/www
+  - reload(server, app); // just after createServer
+  - <script src="/reload/reload.js"></script> to myapp/views/index.ejs
+- move error code from app.js to www just below reload()
+- change package.json to "start": "nodemon ./bin/www"
