@@ -1,0 +1,5 @@
+Creating a test express application with express-generator
+- npm i -g express-generator
+- express --view=ejs myapp
+- cd myapp
+- npm i
