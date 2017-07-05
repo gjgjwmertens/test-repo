@@ -5,6 +5,10 @@
  */
 
 var app = require('../app');
+/* To see debug output you need to set the DEBUG environment variable
+- cmd: set DEBUG=myapp:*
+- powershell: $env:DEBUG="myap:*"
+*/
 var debug = require('debug')('myapp:server');
 var reload = require('reload');
 var http = require('http');
