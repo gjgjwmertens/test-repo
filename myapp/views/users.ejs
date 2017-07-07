@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div class="add-user-container">
+      <form action="/" id="addUserFormId">
+        <input type="text" name="user_name" >
+        <input type="submit" value="Add" >
+    </div>
+  </body>
+  <script src="/reload/reload.js"></script>
+  <script src="/jquery/jquery.min.js"></script>
+  <script>
+    var userUrl = 'http://localhost:3030/users';
+
+    $('addUserFormId').submit(function(event) {
+      event.preventDefault();
+      $.post(userUrl, $(this).serialize())
+        .done(function(data) {
+          console.log('Return data: ', data);
+        })
+    })
+  </script>
+</html>

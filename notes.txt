@@ -11,4 +11,16 @@ Creating a test express application with express-generator
   - reload(server, app); // just after createServer
   - <script src="/reload/reload.js"></script> to myapp/views/index.ejs
 - move error code from app.js to www just below reload()
-- change package.json to "start": "nodemon ./bin/www"
+- change package.json to "start": "cross-env DEBUG=myapp:* nodemon -e * ./bin/www"
+  - run npm i -g cross-env (if it not installed yet)
+- To see debug output you need to set the DEBUG environment variable
+  - cmd: set DEBUG=myapp:*
+  - powershell: $env:DEBUG="myap:*"
+- backend folder has a express without a view system
+- npm update
+  - npm i -g npm
+    - C:\Users\G.J\AppData\Roaming\npm\npm -> C:\Users\G.J\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+- run the frontend / backend
+  - shift right click the myapp / backend folder -> open powershell here
+  - npm start
+- created a branch with GitHubDesktop: add-mongo-db

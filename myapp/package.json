@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon -e * ./bin/www"
+    "start": "cross-env DEBUG=myapp:* nodemon -e * ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
