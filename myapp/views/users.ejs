@@ -7,22 +7,33 @@
   <body>
     <h1><%= title %></h1>
     <div class="add-user-container">
-      <form action="/" id="addUserFormId">
-        <input type="text" name="user_name" >
+      <form action="/users" id="addUserFormId">
+        <input type="text" name="username" >
         <input type="submit" value="Add" >
     </div>
   </body>
   <script src="/reload/reload.js"></script>
   <script src="/jquery/jquery.min.js"></script>
   <script>
-    var userUrl = 'http://localhost:3030/users';
+    var userUrl = 'http://localhost:3030/api/users';
+    $.getJSON( userUrl)
+      .done(function(data) {
+        console.log( "second success" );
+        console.log(data);
+      })
+      .fail(function(err) {
+        console.log(err);
+      });
 
-    $('addUserFormId').submit(function(event) {
+    $('#addUserFormId').submit(function(event) {
       event.preventDefault();
       $.post(userUrl, $(this).serialize())
         .done(function(data) {
           console.log('Return data: ', data);
         })
-    })
+        .fail(function(err) {
+          console.log(err);
+        });
+    });
   </script>
 </html>
