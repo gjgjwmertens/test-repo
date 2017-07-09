@@ -10,11 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.5.0",
     "body-parser": "^1.13.2",
     "colors": "^1.1.2",
     "cors": "^2.8.3",
     "express": "^4.13.1",
     "lodash": "^3.10.0",
+    "mongoose": "^4.11.1",
     "morgan": "^1.6.1"
   },
   "devDependencies": {

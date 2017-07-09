@@ -12,7 +12,7 @@
   <script src="/jquery/jquery.min.js"></script>
   <script>
     console.log($().jquery);
-    var jqxhr = $.getJSON( "http://localhost:3030/api/users", {'test': 'help'}, function() {
+    var jqxhr = $.getJSON( "http://localhost:3030/api/posts", {'test': 'help'}, function() {
       console.log( "success" );
     })
       .done(function(data) {
@@ -26,7 +26,7 @@
         console.log( "always" );
       });
 
-    // Perform other work here ...
+    // /1Perform other work here ...
 
     // Set another completion function for the request above
     jqxhr.always(function() {

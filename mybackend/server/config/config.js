@@ -4,7 +4,10 @@ var config = {
   dev: 'development',
   test: 'testing',
   prod: 'production',
-  port: process.env.PORT || 3030
+  port: process.env.PORT || 3030,
+  db: {
+    url: 'mongodb://localhost:27017/test'
+  }
 };
 
 process.env.NODE_ENV = process.env.NODE_ENV || config.dev;
