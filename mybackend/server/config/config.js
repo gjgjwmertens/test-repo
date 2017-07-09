@@ -5,8 +5,10 @@ var config = {
   test: 'testing',
   prod: 'production',
   port: process.env.PORT || 3030,
-  db: {
-    url: 'mongodb://localhost:27017/test'
+  // 1 days in minutes
+  expireTime: 24 * 60 * 1,
+  secrets: {
+    jwt: process.env.JWT || 'gumball'
   }
 };
 

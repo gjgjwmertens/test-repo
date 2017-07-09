@@ -1,4 +1,8 @@
 module.exports = {
   // enabled logging for development
-  logging: true
+  logging: true,
+  seed: true,
+  db: {
+    url: 'mongodb://localhost:27017/nodeblog_dev'
+  }
 };
