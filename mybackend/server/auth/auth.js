@@ -46,6 +46,7 @@ exports.getFreshUser = function() {
 
 exports.verifyUser = function() {
   return function(req, res, next) {
+    console.log(req.body);
     var username = req.body.username;
     var password = req.body.password;
 
@@ -85,6 +86,6 @@ exports.signToken = function(id) {
   return jwt.sign(
     {_id: id},
     config.secrets.jwt,
-    {expiresInMinutes: config.expireTime}
+    {expiresIn: config.expireTime}
   );
 };
