@@ -39,8 +39,8 @@ var logger = {
     var args = _.toArray(arguments)
       .map(function(arg) {
         arg = arg.stack || arg;
-        var name = arg.name || '[ ❌ ERROR ❌ ]';
-        var log = name.yellow + '  ' + arg.red;
+        var name = arg.name || '[ ❌ ERROR ❌ ]'.yellow;
+        var log = name.yellow + '  ' + arg.cyan;
         return log;
       });
 

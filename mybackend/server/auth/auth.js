@@ -1,11 +1,16 @@
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 var config = require('../config/config');
+/*
+By default, the decoded token is attached to req.user but can be configured with the requestProperty option.
+jwt({ secret: publicKey, requestProperty: 'auth' });
+*/
 var checkToken = expressJwt({ secret: config.secrets.jwt });
 var User = require('../api/user/userModel');
 
 exports.decodeToken = function() {
   return function(req, res, next) {
+    // throw new Error('auth.js::decodeToken');
     // make it optional to place token on query string
     // if it is, place it on the headers where it should be
     // so checkToken can see it. See follow the 'Bearer 034930493' format
@@ -15,7 +20,7 @@ exports.decodeToken = function() {
     }
 
     // this will call next if token is valid
-    // and send error if its not. It will attached
+    // and seexpnd error if its not. It will attached
     // the decoded token to req.user
     checkToken(req, res, next);
   };
