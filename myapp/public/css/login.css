@@ -1,4 +1,13 @@
 /* Bordered form */
+div.login-form-container {
+  width: 50%;
+  height: 50%;
+  min-width: 500px;
+  max-width: 750px;
+  min-height: 700px;
+  max-height: 1000px;
+  margin: auto;
+}
 form {
     border: 3px solid #f1f1f1;
 }

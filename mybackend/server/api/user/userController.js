@@ -58,8 +58,18 @@ exports.post = function(req, res, next) {
   newUser.save(function(err, user) {
     if(err) { return next(err);}
 
-    var token = signToken(user._id);
-    res.json({token: token});
+    // var token = signToken(user._id);
+    // res.json({token: token});
+    User.find({})
+      .select('-password')
+      .exec()
+      .then(function(users){
+        res.json(users.map(function(user){
+          return user.toJson();
+        }));
+      }, function(err){
+        next(err);
+      });
   });
 };
 

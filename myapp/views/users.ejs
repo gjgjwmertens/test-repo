@@ -6,34 +6,51 @@
   </head>
   <body>
     <h1><%= title %></h1>
+    <table id="userListContainerId">
+    </table>
     <div class="add-user-container">
       <form action="/users" id="addUserFormId">
-        <input type="text" name="username" >
+        <label><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
         <input type="submit" value="Add" >
     </div>
   </body>
-  <script src="/reload/reload.js"></script>
-  <script src="/jquery/jquery.min.js"></script>
+  <%- include('inc/main_scripts') %>
+  <script src="js/auth.js"></script>
   <script>
     var userUrl = 'http://localhost:3030/api/users';
-    $.getJSON( userUrl)
+
+    $(()=>{
+      $.getJSON( userUrl)
       .done(function(data) {
-        console.log( "second success" );
-        console.log(data);
+        poputateUserTable(data);
       })
       .fail(function(err) {
         console.log(err);
       });
 
-    $('#addUserFormId').submit(function(event) {
-      event.preventDefault();
-      $.post(userUrl, $(this).serialize())
+      $('#addUserFormId').submit(function(event) {
+        event.preventDefault();
+        $.post(userUrl, $(this).serialize())
         .done(function(data) {
-          console.log('Return data: ', data);
+          poputateUserTable(data);
         })
         .fail(function(err) {
           console.log(err);
         });
+      });
     });
+
+    function poputateUserTable(list) {
+      $('#userListContainerId').empty();
+      list.forEach((e) => {
+        $('#userListContainerId').append(
+          '<tr><td>' + e._id + '</td><td>' + e.username + '</td></tr>'
+        );
+      });
+    };
   </script>
 </html>

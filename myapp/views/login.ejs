@@ -2,44 +2,43 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/css/style.css' />
+    <%- include('inc/main_css') %>
     <link rel='stylesheet' href='/css/login.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <form action="http://localhost:3030/auth/signin" id="loginFormId">
-      <div class="imgcontainer">
-        <img src="/img/img_avatar2.png" alt="Avatar" class="avatar">
-      </div>
+    <div class="login-form-container">
+      <form action="http://localhost:3030/auth/signin" id="loginFormId">
+        <div class="imgcontainer">
+          <img src="/img/img_avatar2.png" alt="Avatar" class="avatar">
+        </div>
 
-      <div class="container">
-        <label><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
+        <div class="container">
+          <label><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="username" required>
 
-        <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
+          <label><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="password" required>
 
-        <button type="submit">Login</button>
-        <input type="checkbox" checked="checked"> Remember me
-      </div>
+          <button type="submit">Login</button>
+          <input type="checkbox" checked="checked"> Remember me
+        </div>
 
-      <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
-      </div>
-    </form>
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" class="cancelbtn">Cancel</button>
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+      </form>
+    </div>
   </body>
-  <script src="/reload/reload.js"></script>
-  <script src="/jquery/jquery.min.js"></script>
+  <%- include('inc/main_scripts') %>
   <script>
-    var loginUrl = 'http://localhost:3030/auth/signin';
-
     $('#loginFormId').submit(function(event) {
       event.preventDefault();
-      console.log(this.action);
-      $.post(loginUrl, $(this).serialize())
+      $.post(this.action, $(this).serialize())
         .done(function(data) {
           console.log('Return data: ', data);
+          localStorage.setItem('myapp-access-token', JSON.stringify(data));
+          window.location.href = '/users';
         })
         .fail(function(err) {
           console.log('Error: ', err);
