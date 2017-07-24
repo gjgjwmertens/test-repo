@@ -4,11 +4,18 @@ $(()=>{
     localStorage.removeItem('myapp-access-token');
     window.location.href = '/login';
   });
-
-  if(access_token) {
-    setInterval(() => {
-      let current_time = Date().toString();
-      $('#timeFieldId').text(current_time);
-    }, 1000);
-  }
 });
+
+function ajaxLoadingOn() {
+  $('#ajaxLoadingImgId')
+    .css('visibility', 'visible');
+  $('#ajaxLoadingBtnId')
+    .toggleClass('btn-outline-primary btn-outline-success');
+};
+
+function ajaxLoadingOff() {
+  $('#ajaxLoadingImgId')
+    .css('visibility', 'hidden');
+  $('#ajaxLoadingBtnId')
+    .toggleClass('btn-outline-primary btn-outline-success');
+};

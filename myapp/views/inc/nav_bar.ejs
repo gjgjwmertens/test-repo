@@ -1,0 +1,50 @@
+<script src="/js/logout.js"></script>
+<script src="js/auth.js"></script>
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/">
+    <img src="/img/education-icon.svg"
+      width="30" height="30"
+      class="d-inline-block align-top" alt="Home">
+    MyApp
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item <%if (title == 'Food') { %>active<% } %>">
+        <a class="nav-link" href="/foods">Food</a>
+      </li>
+      <li class="nav-item <%if (title == 'Users') { %>active<% } %>">
+        <a class="nav-link" href="/users">Users</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <button
+        id="ajaxLoadingBtnId"
+        class="btn btn-outline-primary my-2 my-sm-0"
+        style="padding: 7px 14px; margin-right: 10px"
+        type="button">
+        <img
+          id="ajaxLoadingImgId"
+          src="img/ajax-loader.gif" width="22px" height="22px"/>
+      </button>
+      <input  id="userNameFieldId" disabled
+        class="form-control mr-sm-2" type="text"
+        placeholder="User name">
+      <button
+         id="logoutBtnId"
+         class="btn btn-outline-primary my-2 my-sm-0"
+         type="button">Logout</button>
+    </form>
+  </div>
+</nav>
+<div id="allertContainerId" class="container">
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Well done!</strong> You successfully read this important alert message.
+  </div>
+</div>

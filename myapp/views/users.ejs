@@ -6,28 +6,40 @@
     <%- include('inc/main_scripts') %>
   </head>
   <body>
-    <%- include('inc/logout') %>
-    <h1><%= title %></h1>
-    <table id="userListContainerId">
-    </table>
-    <div class="add-user-container">
-      <form action="/users" id="addUserFormId">
-        <label><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
-
-        <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-        <input type="submit" value="Add" >
-      </form>
+    <%- include('inc/nav_bar') %>
+    <div class="container">
+      <h1><%= title %></h1>
+      <table class="table table-hover">
+        <thead><tr><th>Id</th><th>Name</th></tr></thead>
+        <tbody id="userListContainerId"></tbody>
+      </table>
+      <div class="card">
+        <div class="card-header">Add user</div>
+        <div class="card-block">
+          <form action="/users" id="addUserFormId">
+            <div class="form-group">
+              <label><b>Username</b></label>
+              <input type="text" class="form-control" placeholder="Enter Username" name="username" required>
+            </div>
+            <div class="form-group">
+              <label><b>Password</b></label>
+              <input type="password" class="form-control" placeholder="Enter Password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add</button>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
   <script>
     var userUrl = 'http://localhost:3030/api/users';
 
     $(()=>{
+      ajaxLoadingOn();
       $.getJSON( userUrl)
       .done(function(data) {
         poputateUserTable(data);
+        ajaxLoadingOff();
       })
       .fail(function(err) {
         console.log(err);
@@ -47,9 +59,12 @@
 
     function poputateUserTable(list) {
       $('#userListContainerId').empty();
+      // $('#userListContainerId').append(
+      //   '<thead><tr><th>Id</th><th>Name</th></tr></thead>'
+      // );
       list.forEach((e) => {
         $('#userListContainerId').append(
-          '<tr><td>' + e._id + '</td><td>' + e.username + '</td></tr>'
+          '<tr><th scope="row">' + e._id + '</th><td>' + e.username + '</td></tr>'
         );
       });
     };

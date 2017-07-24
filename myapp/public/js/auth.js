@@ -5,8 +5,8 @@ access_token = JSON.parse(localStorage.getItem('myapp-access-token'));
 if(!access_token) {
   window.location.href = '/login';
 } else {
-  console.log('username: ', access_token.user.username);
   $(() => {
-    $('#userNameFieldId').text(access_token.user.username);
+    $('#userNameFieldId').val(access_token.user.username);
+    ajaxLoadingOff();
   });
 }
