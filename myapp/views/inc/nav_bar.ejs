@@ -1,3 +1,4 @@
+<script src="js/nav_bar.js"></script>
 <script src="/js/logout.js"></script>
 <script src="js/auth.js"></script>
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -40,11 +41,22 @@
     </form>
   </div>
 </nav>
-<div id="allertContainerId" class="container">
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
+<style>
+  div.alert-spacer {
+    min-height: 70px;
+  }
+
+  div.hidden {
+    display: none;
+  }
+</style>
+<div id="alertContainerId" class="container alert-spacer">
+</div>
+<div id="templateAlertContainerId" class="hidden">
+  <div id="templateAlertId" class="alert alert-dismissible fade show" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-    <strong>Well done!</strong> You successfully read this important alert message.
+    <div id="templateAlertMsgContainerId"></div>
   </div>
 </div>
