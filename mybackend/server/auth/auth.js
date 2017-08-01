@@ -28,6 +28,7 @@ exports.decodeToken = function() {
 
 exports.getFreshUser = function() {
   return function(req, res, next) {
+    // console.log('user: ' + req.user._id);
     User.findById(req.user._id)
       .then(function(user) {
         if (!user) {

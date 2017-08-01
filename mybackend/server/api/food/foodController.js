@@ -1,15 +1,15 @@
-var Post = require('./postModel');
+var Food = require('./foodModel');
 var _ = require('lodash');
 
 exports.params = function(req, res, next, id) {
-  Post.findById(id)
+  Food.findById(id)
     .populate('author categories')
     .exec()
-    .then(function(post) {
-      if (!post) {
-        next(new Error('No post with that id'));
+    .then(function(food) {
+      if (!food) {
+        next(new Error('No food with that id'));
       } else {
-        req.post = post;
+        req.food = food;
         next();
       }
     }, function(err) {
@@ -18,30 +18,29 @@ exports.params = function(req, res, next, id) {
 };
 
 exports.get = function(req, res, next) {
-  Post.find({})
+  Food.find({})
     .populate('author categories')
     .exec()
-    .then(function(posts){
-      logger.log(req.query);
-      res.json(posts);
+    .then(function(foods){
+      res.json(foods);
     }, function(err){
       next(err);
     });
 };
 
 exports.getOne = function(req, res, next) {
-  var post = req.post;
-  res.json(post);
+  var food = req.food;
+  res.json(food);
 };
 
 exports.put = function(req, res, next) {
-  var post = req.post;
+  var food = req.food;
 
   var update = req.body;
 
-  _.merge(post, update);
+  _.merge(food, update);
 
-  post.save(function(err, saved) {
+  food.save(function(err, saved) {
     if (err) {
       next(err);
     } else {
@@ -51,18 +50,18 @@ exports.put = function(req, res, next) {
 };
 
 exports.post = function(req, res, next) {
-  var newpost = req.body;
+  var newFood = req.body;
 
-  Post.create(newpost)
-    .then(function(post) {
-      res.json(post);
+  Food.create(newFood)
+    .then(function(food) {
+      res.json(food);
     }, function(err) {
       next(err);
     });
 };
 
 exports.delete = function(req, res, next) {
-  req.post.remove(function(err, removed) {
+  req.food.remove(function(err, removed) {
     if (err) {
       next(err);
     } else {

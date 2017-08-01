@@ -1,5 +1,5 @@
 var User = require('../api/user/userModel');
-var Post = require('../api/post/postModel');
+var Food = require('../api/food/foodModel');
 var Category = require('../api/category/categoryModel');
 var _ = require('lodash');
 var logger = require('./logger');
@@ -18,10 +18,10 @@ var categories = [
   {name: 'UI/UX'}
 ];
 
-var posts = [
-  {title: 'Learn angular 2 today', text: 'Angular to is so dope'},
-  {title: '10 reasons you should love IE7', text: 'IE7 is so amazing'},
-  {title: 'Why we switched to Go', text: 'go is dope'}
+var foods = [
+  {name: 'BarI', brand: '1'},
+  {name: 'BarIII', brand: '3'},
+  {name: 'BarII', brand: '2'}
 ];
 
 var createDoc = function(model, doc) {
@@ -34,7 +34,7 @@ var createDoc = function(model, doc) {
 
 var cleanDB = function() {
   logger.log('... cleaning the DB');
-  var cleanPromises = [User, Category, Post]
+  var cleanPromises = [User, Category, Food]
     .map(function(model) {
       return model.remove().exec();
     });
@@ -64,36 +64,36 @@ var createCategories = function(data) {
     });
 };
 
-var createPosts = function(data) {
-  var addCategory = function(post, category) {
-    post.categories.push(category);
+var createFoods = function(data) {
+  var addCategory = function(food, category) {
+    food.categories.push(category);
 
     return new Promise(function(resolve, reject) {
-      post.save(function(err, saved) {
+      food.save(function(err, saved) {
         return err ? reject(err) : resolve(saved)
       });
     });
   };
 
-  var newPosts = posts.map(function(post, i) {
-    post.author = data.users[i]._id;
-    return createDoc(Post, post);
+  var newFoods = foods.map(function(food, i) {
+    food.author = data.users[i]._id;
+    return createDoc(Food, food);
   });
 
-  return Promise.all(newPosts)
-    .then(function(savedPosts) {
-      return Promise.all(savedPosts.map(function(post, i){
-        return addCategory(post, data.categories[i])
+  return Promise.all(newFoods)
+    .then(function(savedFoods) {
+      return Promise.all(savedFoods.map(function(food, i){
+        return addCategory(food, data.categories[i])
       }));
     })
     .then(function() {
-      return 'Seeded DB with 3 Posts, 3 Users, 3 Categories';
+      return 'Seeded DB with 3 Foods, 3 Users, 3 Categories';
     });
 };
 
 cleanDB()
   .then(createUsers)
   .then(createCategories)
-  .then(createPosts)
+  .then(createFoods)
   .then(logger.log.bind(logger))
   .catch(logger.log.bind(logger));

@@ -10,20 +10,20 @@
     <div class="container">
       <h1><%= title %></h1>
       <table class="table table-hover">
-        <thead><tr><th>Id</th><th>Name</th></tr></thead>
-        <tbody id="userListContainerId"></tbody>
+        <thead><tr><th>Id</th><th>Name</th><th>Brand</th></tr></thead>
+        <tbody id="itemListContainerId"></tbody>
       </table>
       <div class="card">
-        <div class="card-header">Add user</div>
+        <div class="card-header">Add food</div>
         <div class="card-block">
-          <form action="/users" id="addUserFormId">
+          <form action="/api/foods" id="addFormId">
             <div class="form-group">
-              <label><b>Username</b></label>
-              <input type="text" class="form-control" placeholder="Enter Username" name="username" required>
+              <label><b>Name</b></label>
+              <input type="text" class="form-control" placeholder="Enter Username" name="name" required>
             </div>
             <div class="form-group">
-              <label><b>Password</b></label>
-              <input type="password" class="form-control" placeholder="Enter Password" name="password" required>
+              <label><b>Brand</b></label>
+              <input type="text" class="form-control" placeholder="Enter brand" name="brand" required>
             </div>
             <button type="submit" class="btn btn-success">Add</button>
           </form>
@@ -32,37 +32,38 @@
     </div>
   </body>
   <script>
-    var userUrl = 'http://localhost:3030/api/users';
+    var apiUrl = 'http://localhost:3030/api/foods';
 
     $(()=>{
       ajaxLoadingOn();
-      $.getJSON( userUrl)
+      $.getJSON( apiUrl)
       .done(function(data) {
-        poputateUserTable(data);
+        populateTable(data);
         ajaxLoadingOff();
       })
       .fail(handleError);
 
-      $('#addUserFormId').submit(function(event) {
+      $('#addFormId').submit(function(event) {
         event.preventDefault();
-        $.post(userUrl, $(this).serialize())
+        $.post(apiUrl, $(this).serialize())
         .done(function(data) {
-          poputateUserTable(data);
+          populateTable(data);
         })
-        .fail(function(err) {
-          console.log(err);
-        });
+        .fail(handleError);
       });
     });
 
-    function poputateUserTable(list) {
-      $('#userListContainerId').empty();
+    function populateTable(list) {
+      $('#itemListContainerId').empty();
       // $('#userListContainerId').append(
       //   '<thead><tr><th>Id</th><th>Name</th></tr></thead>'
       // );
       list.forEach((e) => {
-        $('#userListContainerId').append(
-          '<tr><th scope="row">' + e._id + '</th><td>' + e.username + '</td></tr>'
+        $('#itemListContainerId').append(
+          '<tr><th scope="row">' + e._id + '</th>' +
+          '<td>' + e.name + '</td>' +
+          '<td>' + e.brand + '</td>' + 
+          '</tr>'
         );
       });
     };

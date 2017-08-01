@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var foods = require('./routes/foods');
 var login = require('./routes/login');
 
 var app = express();
@@ -26,6 +27,7 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/foods', foods);
 app.use('/login', login);
 
 module.exports = app;
